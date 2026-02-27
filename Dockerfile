@@ -24,6 +24,9 @@ WORKDIR /var/www/html
 
 COPY . .
 
+RUN chown -R www-data:www-data /var/www/html \
+    && a2enmod rewrite \
+    && sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 RUN composer install --no-dev --optimize-autoloader
 
 RUN php artisan config:cache
