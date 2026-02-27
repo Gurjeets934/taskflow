@@ -28,6 +28,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+RUN php artisan storage:link
+
 # Install Node dependencies
 RUN npm install
 
